@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>_hsql Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js" integrity="sha512-+6Q7hv5pGUBXOuHWw8OdQx3ac7DzM3oJhYqz7SHDku0yl9EBdMqegoPed4GsHRoNF/VQYK2LTYewAIEBrEf/3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="/index.js"></script>
+    <link rel="stylesheet" href="./css/index.css">
+  </head>
+  <body>
+    <h1>_hsql Demo</h1>
+    <button 
+      _=  "on click 
+      put '' into #results
+      db 'CREATE TABLE users (firstname CHAR(50) NOT NULL, lastname CHAR(50) NOT NULL, age INT(50) NOT NULL)'
+      put `[${Date.now()}] Table created successfully. Add records by updating inputs and clicking Insert.` into #results
+      catch error
+      put `<p style='color:red;'>${error}</p>` at the end of #results
+      "
+    >
+    Create Table
+    </button>
+    <p><label for="firstname">First name:</label> <input type="text" id="firstname" value="John"></p>
+    <p><label for="lastname">Last name:</label> <input type="text" id="lastname" value="Doe"></p>
+    <p><label for="age">Age:</label> <input type="number" id="age" value="27"></p>
+    <button 
+      _=  "on click
+      put '' into #results
+      set record to [#firstname's value, #lastname's value, #age's value as a Number]
+      db 'INSERT INTO users VALUES (?,?,?)' with record
+      put `[${Date.now()}] Record added successfully. Add more records or click Query to query on a range of age.` at end of #results
+      catch error
+      put `[${Date.now()}] <p style='color:red;'>${error}</p>` at the end of #results
+      "
+    >
+    Insert
+    </button>
+    <p><label for="from">Age range from:</label> <input type="number" id="from" value="20"></p>
+    <p><label for="to">to:</label> <input type="number" id="to" value="30"></p>
+    <button
+      _=  "on click
+          db 'SELECT * FROM users WHERE age BETWEEN ? AND ?' with [#from.value, #to.value]
+          put `[${Date.now()}] ` into #results
+          table it
+          put it at the end of #results"
+    >
+      Query
+  </button>
+    <hr />
+    <div id="results">
+    Click Create Table to create the users table.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>_hsql Playground</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js" integrity="sha512-+6Q7hv5pGUBXOuHWw8OdQx3ac7DzM3oJhYqz7SHDku0yl9EBdMqegoPed4GsHRoNF/VQYK2LTYewAIEBrEf/3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="/index.js"></script>
+    <link rel="stylesheet" href="./css/index.css">
+  </head>
+  <body>
+    <h1>_hsql Playground</h1>
+    <textarea rows="10" style="width: min(50em,100%);">
+db 'CREATE TABLE test (col1, col2)'
+db 'CREATE TABLE users (firstname CHAR(50) NOT NULL, lastname CHAR(50) NOT NULL, age INT(3) NOT NULL)'
+db 'INSERT INTO users VALUES (?,?,?)' with ['John', 'Doe', 27]
+db 'INSERT INTO users VALUES ($firstname,$lastname,$age)' with {$firstname: 'Jane', $lastname: 'Doe', $age: 34}
+db 'SELECT * FROM users'
+table it
+put it into #results</textarea>
+    <br />
+    <button
+      _=  "on click
+             get (previous <textarea/>)'s value
+             _hyperscript(it, {hyperscriptTarget: (previous <textarea/>)})"
+    >
+    Run
+    </button>
+    <hr />
+    <div id="results">
+      Results
+      <br />
+      <br />
+    </div>
+  </body>
+</html>
