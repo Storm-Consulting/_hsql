@@ -8,13 +8,56 @@
 </head>
 <body>
     <h1>_hsql</h1>
-    <p>SQL meets hyperscript.</p>
-    <h3>Examples</h3>
-    <ul>
-        <li><a href="./demo.html">Basic Demo</a></li>
-        <li><a href="./multiple.html">Multiple Statements Demo</a></li>
-        <li><a href="./playground.html">Playground</a></li>
-    </ul>
+SQL 🤝 hyperscript.
+
+<h2>requirements</h2>
+SQL database running in the browser
+
+<h2>usage</h2>
+<h3>statements</h3>
+<h4>direct SQL statements</h4>
+<pre><code class="language-js">db 'CREATE TABLE users (firstname CHAR(50) NOT NULL, lastname CHAR(50) NOT NULL, age INT(3) NOT NULL)'</code></pre>
+<h4>prepared SQL statements with unnamed parameters</h4>
+<pre><code class="language-js">db 'INSERT INTO users VALUES (?,?,?)' with ['John', 'Doe', 27]</code></pre>
+<h4>prepared SQL statements with named parameters</h4>
+<pre><code class="language-js">db 'INSERT INTO users VALUES ($firstname,$lastname,$age)' with {$firstname: 'John', $lastname: 'Doe', $age: 27}</code></pre>
+
+<h3>error handling</h3>
+errors can be handled using `catch`:
+<pre><code class="language-js">db 'INSERT INTO users VALUES (?,?,?)' with record
+catch error
+    // Handle errors...</code></pre>
+
+<h3>working with the DOM</h3>
+<h4>using values from input fields</h4>
+<i>HTML</i>
+<pre><code class="language-html">&lt;input id="firstname" value="John" type="text"&gt;
+&lt;input id="lastname" value="Doe" type="text"&gt;
+&lt;input id="age" value="27" type="number"&gt;</code></pre>
+---
+<i>hyperscript</i>
+<pre><code class="language-js">set record to [#firstname.value, #lastname.value, #age.value as a Number]
+db 'INSERT INTO users VALUES (?,?,?)' with record</code></pre>
+<h4>creating tables from query results</h4>
+<pre><code class="language-js">table it // "it" is the result of the db command
+put it into #results // HTML</code></pre>
+
+<h2>examples</h2>
+<ul>
+<li><a href="./demo.html">basic demo</a></li>
+<li><a href="./multiple.html">multiple statements demo</a></li>
+<li><a href="./playground.html">playground</a></li>
+</ul>
+
+<h2>development</h2>
+
+<ul style="list-style: none;">
+<li>&checkmark; Integration of SQL.js</li>
+<li>&checkmark; Running direct statements against SQL.js</li>
+<li>&checkmark; Running prepared statements against SQL.js</li>
+<li>&checkmark; Responding with HTML</li>
+<li>&cross; Native SQL statements using hyperscript (`dbselect * from users where id = <#id/>.value`)</li>
+</ul>
     <a href="https://github.com/3c2f3e/_hsql/">View _hsql on GitHub</a>
 </body>
 </html>
