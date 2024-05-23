@@ -48,9 +48,9 @@ put it into #results // HTML
 ```
 
 ## examples
-- [basic demo](./examples/demo.html)
-- [multiple statements demo](./examples/multiple.html)
-- [playground](./examples/playground.html)
+- [basic demo](https://3c2f3e.github.io/_hsql/demo.html) [(code)](./examples/demo.html)
+- [multiple statements demo](https://3c2f3e.github.io/_hsql/multiple.html) [(code)](./examples/multiple.html)
+- [playground](https://3c2f3e.github.io/_hsql/playground.html) [(code)](./examples/playground.html)
 
 ## development
 
