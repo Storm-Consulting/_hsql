@@ -4,6 +4,20 @@ SQL 🤝 hyperscript.
 ## requirements
 SQL database running in the browser
 
+## installation
+1. include [sql.js](https://github.com/sql-js/sql.js)
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+```
+2. include [_hyperscript](https://hyperscript.org/)
+```html
+<script src="https://unpkg.com/hyperscript.org@0.9.12/dist/_hyperscript.min.js"></script>
+```
+3. include _hsql:
+```html
+<script src="https://cdn.jsdelivr.net/gh/3c2f3e/_hsql@v1.0.0/index.min.js"></script>
+```
+
 ## usage
 ### statements
 #### direct SQL statements
