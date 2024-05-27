@@ -20,17 +20,7 @@ _hyperscript.addCommand("db", function (parser, runtime, tokens) {
   return {
     args: [queryToken, preparedValuesToken],
     async op(context, query, prepared) {
-      let stmt;
-      if (prepared) {
-        stmt = database.prepare(query, prepared);
-      } else {
-        stmt = database.prepare(query);
-      }
-      results = [];
-      while (stmt.step()) {
-        const row = stmt.getAsObject();
-        results.push(row);
-      }
+      let results = database.exec(query, prepared);
       context.result = results;
       return runtime.findNext(this);
     },
@@ -46,26 +36,29 @@ _hyperscript.addCommand("table", function (parser, runtime, tokens) {
       if (value.length == 0) {
         context.result = "No results found.";
       } else {
-        let table = document.createElement("table");
-        let head = Object.keys(value[0]);
-        let thead = table.createTHead();
-        let theadRow = thead.insertRow();
-        for (let i = 0; i < head.length; i++) {
-          let th = document.createElement("th");
-          th.textContent = head[i];
-          theadRow.appendChild(th);
-        }
-        let tbody = table.createTBody();
-        for (let i = 0; i < value.length; i++) {
-          let row = value[i];
-          let rowEl = tbody.insertRow();
-          let rowValues = Object.values(row);
-          for (let j = 0; j < rowValues.length; j++) {
-            let td = rowEl.insertCell();
-            td.textContent = rowValues[j];
+        context.result = "";
+        for (let h = 0; h < value.length; h++) {
+          let queryResult = value[h];
+          let table = document.createElement("table");
+          let head = queryResult.columns;
+          let thead = table.createTHead();
+          let theadRow = thead.insertRow();
+          for (let i = 0; i < head.length; i++) {
+            let th = document.createElement("th");
+            th.textContent = head[i];
+            theadRow.appendChild(th);
           }
+          let tbody = table.createTBody();
+          for (let i = 0; i < queryResult.values.length; i++) {
+            let row = queryResult.values[i];
+            let rowEl = tbody.insertRow();
+            for (let j = 0; j < row.length; j++) {
+              let td = rowEl.insertCell();
+              td.textContent = row[j];
+            }
+          }
+          context.result += table.outerHTML;
         }
-        context.result = table.outerHTML;
       }
       return runtime.findNext(this);
     },
