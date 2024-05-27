@@ -15,7 +15,7 @@ SQL database running in the browser
 ```
 3. include _hsql:
 ```html
-<script src="https://cdn.jsdelivr.net/gh/3c2f3e/_hsql@v1.0.0/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/3c2f3e/_hsql/index.min.js"></script>
 ```
 
 ## usage
