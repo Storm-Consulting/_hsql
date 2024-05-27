@@ -62,9 +62,9 @@ put it into #results // HTML
 ```
 
 ## examples
-- [basic demo](https://3c2f3e.github.io/_hsql/demo.html) [(code)](./examples/demo.html)
-- [multiple statements demo](https://3c2f3e.github.io/_hsql/multiple.html) [(code)](./examples/multiple.html)
-- [playground](https://3c2f3e.github.io/_hsql/playground.html) [(code)](./examples/playground.html)
+- [basic demo](https://3c2f3e.github.io/_hsql/demo.html) [(code)](https://github.com/3c2f3e/_hsql/blob/www/demo.html)
+- [multiple statements demo](https://3c2f3e.github.io/_hsql/multiple.html) [(code)](https://github.com/3c2f3e/_hsql/blob/www/multiple.html)
+- [playground](https://3c2f3e.github.io/_hsql/playground.html) [(code)](https://github.com/3c2f3e/_hsql/blob/www/playground.html)
 
 ## development
 
