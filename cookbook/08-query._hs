@@ -1,0 +1,18 @@
+def insert(tableName, params, all, limit)
+    if (not Array.isArray(params))
+      set queryified to Object.keys(params)
+    else
+      set queryified to params.map( \ r -> '?' ).join(",")
+    end
+    set query to `INSERT INTO ${tableName} VALUES (${queryified})`
+    db `${query}` with params
+    if all 
+      db `SELECT * FROM ${tableName} LIMIT ${limit}`
+      send db:insert(output: it[0], table: tableName, params: params, dbcolumns: it[0].columns, dbvalues: it[0].values, query: query) to body
+    else
+      db `SELECT * FROM ${tableName} WHERE _ROWID_ = last_insert_rowid()`
+      send db:insert(output: it[0], table: tableName, params: params, dbcolumns: it[0].columns, dbvalues: it[0].values, query: query) to body
+    end
+    catch error
+      put `[${Date.now()}] <p style='color:red;'>${error}</p>` at the end of #results
+end

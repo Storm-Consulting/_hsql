@@ -3,28 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>_hsql Procedure Demo</title>
+    <title>_hsql Query Demo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js" integrity="sha512-+6Q7hv5pGUBXOuHWw8OdQx3ac7DzM3oJhYqz7SHDku0yl9EBdMqegoPed4GsHRoNF/VQYK2LTYewAIEBrEf/3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/hyperscript" src="./08-query._hs"></script>
     <script src="https://unpkg.com/hyperscript.org"></script>
     <script src="https://cdn.jsdelivr.net/gh/3c2f3e/_hsql/index.min.js"></script>
-    <script type="text/hyperscript">
-      def insert(tableName, params)
-        if (not Array.isArray(params))
-          set queryified to Object.keys(params)
-        else
-          set queryified to params.map( \ r -> '?' ).join(",")
-        end
-        set query to `INSERT INTO ${tableName} VALUES (${queryified})`
-        db `${query}` with params
-        db 'SELECT * FROM users WHERE _ROWID_ = last_insert_rowid()'
-        send db:insert(output: it[0], table: tableName, params: params, dbcolumns: it[0].columns, dbvalues: it[0].values, query: query) to body
-      end
-    </script>
     <link rel="stylesheet" href="../css/index.css">
   </head>
   <body>
-    <a href="https://github.com/3c2f3e/_hsql/blob/www/cookbook/07-procedure.html">View recipe in Cookbook</a>
-    <h1>_hsql Procedure Demo</h1>
+    <a href="https://github.com/3c2f3e/_hsql/blob/www/cookbook/08-query.html">View recipe in Cookbook</a>
+    <h1>_hsql Query Demo</h1>
     <button 
       _=  "on click 
       put '' into #results
@@ -45,9 +33,7 @@
       put '' into #results
       -- set record to [#firstname's value, #lastname's value, #age's value as a Number]
       set record to {'$firstname':#firstname's value, '$lastname':#lastname's value, '$age':#age's value as a Number}
-      insert('users',record)
-      catch error
-      put `[${Date.now()}] <p style='color:red;'>${error}</p>` at the end of #results
+      insert('users',record, true, 10)
       end
       "
     >

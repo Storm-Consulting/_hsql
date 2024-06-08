@@ -42,10 +42,11 @@
     Insert
     </button>
     <hr />
-    <div id="results" _= "on db:insert[table=='users'] from body
+    <div id="results" _= "on 
+        db:insert[table=='users'] from body
         table event.detail.result
         put it at the end of me
-        "
+      "
     >
     Click Create Table to create the users table.
     </div>
