@@ -15,7 +15,7 @@ SQL database running in the browser
 ```
 3. include _hsql:
 ```html
-<script src="https://cdn.jsdelivr.net/gh/3c2f3e/_hsql/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Storm-Consulting/_hsql/index.min.js"></script>
 ```
 
 ## usage
@@ -62,9 +62,9 @@ put it into #results // HTML
 ```
 
 ## examples
-- [basic demo](https://3c2f3e.github.io/_hsql/demo.html) [(code)](https://github.com/3c2f3e/_hsql/blob/www/demo.html)
-- [multiple statements demo](https://3c2f3e.github.io/_hsql/multiple.html) [(code)](https://github.com/3c2f3e/_hsql/blob/www/multiple.html)
-- [playground](https://3c2f3e.github.io/_hsql/playground.html) [(code)](https://github.com/3c2f3e/_hsql/blob/www/playground.html)
+- [basic demo](https://Storm-Consulting.github.io/_hsql/demo.html) [(code)](https://github.com/Storm-Consulting/_hsql/blob/www/demo.html)
+- [multiple statements demo](https://Storm-Consulting.github.io/_hsql/multiple.html) [(code)](https://github.com/Storm-Consulting/_hsql/blob/www/multiple.html)
+- [playground](https://Storm-Consulting.github.io/_hsql/playground.html) [(code)](https://github.com/Storm-Consulting/_hsql/blob/www/playground.html)
 
 ## development
 
